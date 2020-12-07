@@ -12,10 +12,22 @@ code {
     monospace;
 }
 
-nav {
-  border-bottom: 1px solid black;
-}
-.navbar{
+.navbar ol a{
   list-style-type: none;
-  padding-left: 10px;
+  text-decoration: none;
+  padding: 10px;
+  color: grey;
+  border-radius: 4px;
+  transition : 0.2s;
 }
+
+.navbar ol a:hover{
+  background-color: #282c34;
+  color : white;
+  transition : 0.5s;
+}
+
+.nav{
+  display: inline-block;
+}
+
