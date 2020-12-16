@@ -7,14 +7,13 @@ class Recipes extends React.Component {
   }
   
   render() {
-    console.log('yes');
     return (
       <div className=''>
-        {/* <div
+        <div
           className=''>
           <p>{this.props.recipe.label}</p>
           <img src={this.props.recipe.image} />
-        </div> */}
+        </div>
       </div>
     );
   }
