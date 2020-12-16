@@ -1,8 +1,8 @@
-import React,{Component, Fragment} from 'react';
+import React from 'react';
 import Header from './Header';
 import Recipes from './Recipes';
 import axios from 'axios';
-import './App.css'
+import './App.css';
 const API_KEY = '9b904d703fa0d46a88ce1ac63f29f498';
     const API_ID = '4e9f05eb';
 

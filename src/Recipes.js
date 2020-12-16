@@ -12,7 +12,7 @@ class Recipes extends React.Component {
         <div
           className=''>
           <p>{this.props.recipe.label}</p>
-          <img src={this.props.recipe.image} />
+          <img src={this.props.recipe.image} alt="food"/>
         </div>
       </div>
     );
