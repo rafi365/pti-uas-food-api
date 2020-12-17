@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import Recipes from './Recipes';
 import axios from 'axios';
 import './App.css';
@@ -11,16 +10,33 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import HomeIcon from '@material-ui/icons/Home';
+import AboutUsIcon from '@material-ui/icons/EmojiEmotions';
+import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
+const drawerWidth = 240;
+
+
 const API_KEY = 'eb81175a05fff5ef9e309ba4db2046d5';
 const API_ID = '7850d07c';
 const classes = makeStyles((theme) => ({
@@ -56,19 +72,85 @@ const classes = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+      
+    },
+    marginTop: '200',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
 }));
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       data: null,
       searchinput:'',
       SearchEmpty: true,
     };
   }
-
+  
   handleSearch(event) {
     const inputValue = event.target.value;
     const isEmpty = inputValue === '';
@@ -90,59 +172,35 @@ class App extends React.Component {
         })
         .catch(console.error)
   }
+
   render() {
       
       return (
         <div className="App">
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                FOODIES FOR GROUPIES
-              </Typography>
-              <IconButton aria-label="search" color="inherit">
-                <SearchIcon />
-              </IconButton>
-              <IconButton aria-label="display more actions" edge="end" color="inherit">
-                <MoreIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-        <Header/>
-        <header className="App-header">
-          <h1>FOOD DATABASE</h1>
-  
-          <p>Healthy Food, Healthy Life.</p>
-          <input
-            value={this.state.searchinput}
-            onChange={(event) => {this.handleSearch(event)}}
-          />
-          <input
-          type='button'
-          value='Search'
-          onClick={()=>{this.getsearch()}}
-        />
-        </header>
-        
-        <div className="main">
-        </div>
+          <br/>
+          <br/>
+          <br/>
+          <form className={classes.root} noValidate autoComplete="off" value={this.state.searchinput} onChange={(event) => {this.handleSearch(event)}}>
+            <TextField id="outlined-basic" label="Search Food" variant="outlined" />
+          </form>
+          <IconButton aria-label="search" color="inherit" onClick={()=>{this.getsearch()}}>
+            <SearchIcon />
+          </IconButton>
         { this.state && this.state.data &&
-              <div>
-                <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-                {this.state.data && this.state.data.hits.map(data => {
-                return(
-                  <Recipes 
-                  recipe={data.recipe}
-                  />
-                );
-            })}
+          <div>
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+                  {this.state.data && this.state.data.hits.map(data => {
+                  return(
+                    <Recipes 
+                    recipe={data.recipe}
+                    />
+                  );
+              })}
             </Grid>
-        </Container>
-            </div>
+          </Container>
+          </div>
         }
         </div>
       );

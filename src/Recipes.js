@@ -1,97 +1,108 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import CameraIcon from '@material-ui/icons/RestaurantMenu';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const classes = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 400,
+    marginLeft: 160,
+    marginTop: 20,
+    alignItems: 'center',
   },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
+  media: {
+    height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  cardContent: {
-    flexGrow: 1,
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
   },
 }));
-class Recipes extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isModalOpen: false};
-  }
-  
-  render() {
-    console.log(this.props.recipe.ingredients);
-    return (
-      <React.Fragment>
-      <CssBaseline />
-      <Grid item key={0} xs={12} sm={6} md={4}>
-      <Card className={classes.card}>
-        
-        <img src={this.props.recipe.image} alt="food"/>
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-          {this.props.recipe.label}
-          </Typography>
-          <Typography>
-            <h1>ingredients</h1>
-            {this.props.recipe.ingredients.map(data=>{
-              return(
-                <div>
-                  <h1>{data.text}</h1>
-                  <h3>{data.weight}</h3>
-                  <img src={data.image} alt="food"/>
-                </div>
+
+export default function RecipeReviewCard(props) {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+  console.log(props);
+  return (
+    <Card className={classes.root}>
+      <CardHeader
+        title={props.recipe.label}
+        subheader={'Calories '+props.recipe.calories.toFixed(2)}
+      />
+      <CardMedia
+        className={classes.media}
+        image={props.recipe.image}
+        title={props.recipe.label}
+      />
+      <CardContent>
+      <Typography variant="body2" color="textSecondary" component="p">
+      {props.recipe.healthLabels.map((data) => {
+              return (
+                <p>{data}<br/></p>
               );
-            })}
+            }) }
           </Typography>
+        
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>Ingredients:</Typography>
+          {props.recipe.ingredients.map((data) => {
+              return (
+                <Typography paragraph>
+                {data.text}<br/>
+                Weight:{data.weight}
+                </Typography>
+              );
+            }) }
+          
         </CardContent>
-        <CardActions>
-          <Button size="small" color="primary">
-            View
-          </Button>
-          <Button size="small" color="primary">
-            Edit
-          </Button>
-        </CardActions>
-      </Card>
-    </Grid>
-    </React.Fragment>
-    );
-  }
+      </Collapse>
+    </Card>
+  );
 }
-
-export default Recipes;
-
