@@ -16,19 +16,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
 import ComingSoonIcon from '@material-ui/icons/Lock';
 import AboutUs from './AboutUs';
 import HomeIcon from '@material-ui/icons/Home';
 import AboutUsIcon from '@material-ui/icons/EmojiPeople';
 import App from './App';
-// import Home from './home';
-
-// import Home from './home';
-import Recipes from './Recipes';
+import FoodOfTheDay from './FoodOfTheDay';
+import App_food from './App_Food';
 const drawerWidth = 240;
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -136,7 +132,7 @@ export default function MiniDrawer() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Foodies for Groupies
+                        Foodies For Groupies
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -169,8 +165,8 @@ export default function MiniDrawer() {
                 </List>
                 <Divider />
                 <List>
-                    {['Food of the day', 'Coming Soon'].map((text, index) => (
-                        <ListItem button key={text}>
+                    {['Food of the day', 'Food Search'].map((text, index) => (
+                        <ListItem button key={text} onClick={()=>{handlepageChange(index+2)}}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <ComingSoonIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
@@ -181,6 +177,8 @@ export default function MiniDrawer() {
                 
             {page_change === 1 &&<AboutUs/>}
             {page_change === 0 &&<App/>}
+            {page_change === 2 && <App_food />}
+            {page_change === 3 && <FoodOfTheDay />}
             
             </main>
             
