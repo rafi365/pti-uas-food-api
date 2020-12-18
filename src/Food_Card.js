@@ -64,11 +64,11 @@ export default function RecipeReviewCard(props) {
       Food Content Label: {props.foodie.food.foodContentsLabel}
       <Typography paragraph>Nutrients</Typography>
                 <Typography paragraph>
-                ENERC_KCAL:{props.foodie.food.nutrients.ENERC_KCAL.toFixed(2)}<br/>
-                PROCNT:{props.foodie.food.nutrients.PROCNT.toFixed(2)}<br/>
-                FAT:{props.foodie.food.nutrients.FAT.toFixed(2)}<br/>
-                CHOCDF:{props.foodie.food.nutrients.CHOCDF.toFixed(2)}<br/>
-                FIBTG:{props.foodie.food.nutrients.FIBTG.toFixed(2)}
+                ENERC_KCAL:{props.foodie.food.nutrients.ENERC_KCAL}<br/>
+                PROCNT:{props.foodie.food.nutrients.PROCNT}<br/>
+                FAT:{props.foodie.food.nutrients.FAT}<br/>
+                CHOCDF:{props.foodie.food.nutrients.CHOCDF}<br/>
+                FIBTG:{props.foodie.food.nutrients.FIBTG}
                 </Typography>
           </Typography>
         
@@ -98,7 +98,7 @@ export default function RecipeReviewCard(props) {
               return (
                 <Typography paragraph>
                 {data.label}<br/>
-                Weight:{data.weight.toFixed(2)}
+                Weight:{data.weight}
                 </Typography>
               );
             }) }
