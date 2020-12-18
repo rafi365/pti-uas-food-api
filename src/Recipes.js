@@ -47,7 +47,7 @@ export default function RecipeReviewCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log(props);
+  // console.log(props);
   return (
     <Card className={classes.root}>
       <CardHeader
