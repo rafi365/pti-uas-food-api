@@ -1,5 +1,5 @@
 import React from 'react';
-import CardAboutUs from './Card_Aboutus';
+import CardAboutUs from './CardAboutus';
 import Grid from '@material-ui/core/Grid';
 
 const biodata = [
