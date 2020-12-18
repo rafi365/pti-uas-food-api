@@ -1,5 +1,5 @@
 import React from 'react';
-import Food_Card from './Food_Card';
+import FoodCard from './Food_Card';
 import axios from 'axios';
 import './App.css';
 import IconButton from '@material-ui/core/IconButton';
@@ -87,7 +87,7 @@ class App extends React.Component {
                   
                   return(
                     <Grid key={index} item>
-                    <Food_Card
+                    <FoodCard
                     foodie={data}
                     />
                     </Grid>

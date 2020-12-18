@@ -22,7 +22,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AboutUsIcon from '@material-ui/icons/EmojiPeople';
 import App from './App';
 import FoodOfTheDay from './FoodOfTheDay';
-import App_Food from './App_Food';
+import AppFood from './App_Food';
 const drawerWidth = 240;
 
 
@@ -177,7 +177,7 @@ export default function MiniDrawer() {
                 
             {page_change === 1 &&<AboutUs/>}
             {page_change === 0 &&<App/>}
-            {page_change === 2 && <App_Food />}
+            {page_change === 2 && <AppFood />}
             {page_change === 3 && <FoodOfTheDay />}
             
             </main>
