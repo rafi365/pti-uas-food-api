@@ -165,7 +165,7 @@ export default function MiniDrawer() {
                 </List>
                 <Divider />
                 <List>
-                    {['Food of the day', 'Food Search'].map((text, index) => (
+                    {['Food of the day', 'Coming Soon'].map((text, index) => (
                         <ListItem button key={text} onClick={()=>{handlepageChange(index+2)}}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <ComingSoonIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
